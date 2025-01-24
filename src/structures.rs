@@ -4,6 +4,7 @@ use rand::Rng;
 
 use rand::rngs::ThreadRng;
 
+/// Public structure representing a skip list.
 pub struct SkipList<T: PartialOrd> {
     pub(crate) lanes: Vec<NonNull<SkipNode<T>>>,
     pub(crate) size: usize,
