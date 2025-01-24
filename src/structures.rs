@@ -82,7 +82,6 @@ impl<'a, T: PartialOrd> SkipList<T> {
         Self::with(16, rand::rng())
     }
 
-    #[inline]
     fn search_path(&self, value: &T) -> Vec<Option<NonNull<SkipNode<T>>>> {
         let current_lane_count = self.lanes.len();
         let mut updates = Vec::with_capacity(current_lane_count);
@@ -96,7 +95,7 @@ impl<'a, T: PartialOrd> SkipList<T> {
                 node_walker.next(lane_index);
                 continue;
             }
-            updates[lane_index] = node_walker.current_node.map_or(None, |node| Some(node));
+            updates[lane_index] = node_walker.current_node;
             current_lane -= 1;
         }
         updates
